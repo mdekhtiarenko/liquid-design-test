@@ -1,13 +1,15 @@
 import React from 'react';
-import {LdButton, LdIcon} from "@emdgroup-liquid/liquid/dist/react";
+import {ModalContextProvider} from "./contexts/ModalContextProps";
+import {InitialPage} from "./pages/InitialPage";
 
 function App() {
   return (
       <div className="ld-theme-bubblegum">
-        <LdButton>
-          Click me!
-          <LdIcon name="bulb"/>
-        </LdButton>
+        <ModalContextProvider>
+
+          <InitialPage/>
+
+        </ModalContextProvider>
       </div>
   );
 }
