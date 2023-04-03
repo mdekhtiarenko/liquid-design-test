@@ -1,4 +1,4 @@
-import React, {ReactNode, useCallback, useRef, useState} from "react";
+import React, {createRef, ReactNode, useCallback, useRef, useState} from "react";
 import {LdModal, LdTypo} from "@emdgroup-liquid/liquid/dist/react";
 
 export type Modal = {
@@ -8,12 +8,14 @@ export type Modal = {
 
 interface ModalContextProps {
   showModal: (modal: Modal | null) => void,
-  hideModal: () => void
+  hideModal: () => void,
+  modalRef: React.MutableRefObject<any>
 }
 
 export const ModalContext = React.createContext<ModalContextProps>({
   showModal: () => {},
-  hideModal: () => {}
+  hideModal: () => {},
+  modalRef: createRef()
 });
 
 
@@ -32,7 +34,7 @@ export const ModalContextProvider = ({children}: { children: ReactNode }) => {
     modalRef.current?.close();
   }, [setModal, modalRef])
 
-  return <ModalContext.Provider value={{showModal, hideModal}}>
+  return <ModalContext.Provider value={{modalRef, showModal, hideModal}}>
     {children}
 
 
